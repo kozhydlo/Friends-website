@@ -20,7 +20,7 @@ const AuthPage = ({ onLoginSuccess, onSignupSuccess }) => {
                 password: loginPassword,
             });
             if (res.data.token) {
-                onLoginSuccess(res.data.token); // Викликаємо функцію успішного логіну
+                onLoginSuccess(res.data.token);
                 setSuccessMessage('Login successful!');
             } else {
                 setLoginError('Login failed. Please try again.');
@@ -43,7 +43,7 @@ const AuthPage = ({ onLoginSuccess, onSignupSuccess }) => {
 
             if (res.status === 200 && res.data.token) {
                 if (typeof onSignupSuccess === 'function') {
-                    onSignupSuccess(res.data.token);  // Успішна реєстрація з токеном
+                    onSignupSuccess(res.data.token);
                 } else {
                     console.error('onSignupSuccess is not a function');
                 }
@@ -59,8 +59,6 @@ const AuthPage = ({ onLoginSuccess, onSignupSuccess }) => {
         }
     };
 
-
-
     return (
         <div className="flex flex-col justify-center items-center min-h-screen bg-[#2A9D8F] p-4">
             <h2 className="text-3xl mb-8 text-center font-semibold text-white flex items-center justify-center">
@@ -68,7 +66,6 @@ const AuthPage = ({ onLoginSuccess, onSignupSuccess }) => {
             </h2>
 
             <div className="p-6 bg-[#E9C46A] shadow-md rounded-lg flex flex-col md:flex-row justify-around items-center w-full max-w-[800px]">
-                {/* Форма для Логіна */}
                 <form className="p-4 bg-[#F4A261] shadow-md rounded-lg w-full md:w-[300px] mb-6 md:mb-0 md:mr-4" onSubmit={handleLogin}>
                     <h3 className="text-xl mb-4 text-center">LOGIN</h3>
                     {loginError && <p className="text-red-500 mb-4">{loginError}</p>}
@@ -98,7 +95,6 @@ const AuthPage = ({ onLoginSuccess, onSignupSuccess }) => {
                     </button>
                 </form>
 
-                {/* Форма для Реєстрації */}
                 <form className="p-4 bg-[#F4A261] shadow-md rounded-lg w-full md:w-[300px]" onSubmit={handleSignup}>
                     <h3 className="text-xl mb-4 text-center">REGISTER</h3>
                     {signupError && <p className="text-red-500 mb-4">{signupError}</p>}

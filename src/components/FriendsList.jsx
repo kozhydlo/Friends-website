@@ -7,7 +7,7 @@ const FriendsList = ({ token }) => {
     const [selectedFriend, setSelectedFriend] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isFriendAdded, setIsFriendAdded] = useState(false); // Додаємо стан для повідомлення
+    const [isFriendAdded, setIsFriendAdded] = useState(false);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -50,12 +50,11 @@ const FriendsList = ({ token }) => {
     const handleFriendAdded = (newFriend) => {
         setFriends([...friends, newFriend]);
         setIsModalOpen(false);
-        setIsFriendAdded(true); // Відображаємо повідомлення після додавання друга
+        setIsFriendAdded(true);
     };
 
     return (
         <div className="flex flex-col lg:flex-row">
-            {/* Left panel */}
             <div className="lg:w-1/5 w-full bg-[#E76F51] p-4 lg:h-screen">
                 <h2 className="text-white text-lg mb-4">Your Friends:</h2>
                 <input
@@ -92,16 +91,14 @@ const FriendsList = ({ token }) => {
                 </button>
             </div>
 
-            {/* Right panel */}
             <div className="lg:w-full w-full bg-teal-500 h-screen flex justify-center items-center">
                 {isFriendAdded ? (
-                    <div className="text-white text-3xl">Перезавантажте сторінку</div>
+                    <div className="text-white text-3xl">Please reload the page</div>
                 ) : (
-                    <div className="text-white text-2xl">Оновлень немає </div>
+                    <div className="text-white text-2xl">There are no updates</div>
                 )}
             </div>
 
-            {/* Деталі друга */}
             {selectedFriend && (
                 <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
                     <div className="bg-[#F4A261] p-4 rounded-lg shadow-lg relative w-11/12 lg:w-1/3">
@@ -121,7 +118,6 @@ const FriendsList = ({ token }) => {
                 </div>
             )}
 
-            {/* Модальне вікно для додавання друга */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
                     <AddFriend

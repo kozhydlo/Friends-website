@@ -12,7 +12,7 @@ const AddFriend = ({ token, onFriendAdded, onClose }) => {
 
     const handleAddFriend = async (e) => {
         e.preventDefault();
-        setLoading(true); // Починаємо завантаження
+        setLoading(true);
         try {
             const res = await axios.post('https://friends-website-backend.onrender.com/friends/add', {
                 name,
@@ -30,7 +30,7 @@ const AddFriend = ({ token, onFriendAdded, onClose }) => {
         } catch (err) {
             console.error('Error adding friend:', err);
         } finally {
-            setLoading(false); // Завантаження завершене
+            setLoading(false);
             onClose();
         }
     };
@@ -113,7 +113,7 @@ const AddFriend = ({ token, onFriendAdded, onClose }) => {
                 <button
                     className="bg-[#264653] hover:bg-blue-700 text-white py-2 px-4 rounded w-full mt-4"
                     type="submit"
-                    disabled={loading} // Блокування кнопки, поки запит не завершено
+                    disabled={loading}
                 >
                     {loading ? (
                         <div className="flex justify-center items-center">
