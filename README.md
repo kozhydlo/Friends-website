@@ -22,7 +22,7 @@ This is a frontend application for managing friends' contacts. Users can add, vi
 
 ## Design
 
-The design for this application can be found on Figma: [View Design on Figma]([your-figma-link-here](https://www.figma.com/design/sLCtXKTOX8pflWCbavxUcV/friends-%2F-contact-website?node-id=1-13&t=xsXMCJ7riqsfMx09-1))
+The design for this application can be found on Figma: [View Design on Figma](your-figma-link-here](https://www.figma.com/design/sLCtXKTOX8pflWCbavxUcV/friends-%2F-contact-website?node-id=1-13&t=xsXMCJ7riqsfMx09-1)
 
 
 ## Author
