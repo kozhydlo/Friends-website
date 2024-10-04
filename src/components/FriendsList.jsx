@@ -26,8 +26,9 @@ const FriendsList = ({ token }) => {
     }, [token]);
 
     const filteredFriends = friends.filter((friend) =>
-        friend.name.toLowerCase().includes(searchQuery.toLowerCase())
+        friend.name && friend.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
 
     const handleFriendClick = (friend) => {
         setSelectedFriend(friend);
