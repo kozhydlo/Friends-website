@@ -1,4 +1,4 @@
-// import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect, useMemo } from 'react';
 // import axios from 'axios';
 // import AddFriend from './AddFriend';
 //
@@ -7,10 +7,11 @@
 //     const [selectedFriend, setSelectedFriend] = useState(null);
 //     const [searchQuery, setSearchQuery] = useState('');
 //     const [isModalOpen, setIsModalOpen] = useState(false);
-//     const [isFriendAdded, setIsFriendAdded] = useState(false);
+//     const [loading, setLoading] = useState(false);
 //
 //     useEffect(() => {
 //         const fetchFriends = async () => {
+//             setLoading(true);
 //             try {
 //                 const res = await axios.get('https://friends-website-backend.onrender.com/friends', {
 //                     headers: {
@@ -20,15 +21,18 @@
 //                 setFriends(res.data);
 //             } catch (err) {
 //                 console.error('Error fetching friends:', err);
+//             } finally {
+//                 setLoading(false);
 //             }
 //         };
 //         fetchFriends();
 //     }, [token]);
 //
-//     const filteredFriends = friends.filter((friend) =>
-//         friend.name && friend.name.toLowerCase().includes(searchQuery.toLowerCase())
-//     );
-//
+//     const filteredFriends = useMemo(() => {
+//         return friends.filter((friend) =>
+//             friend.name && friend.name.toLowerCase().includes(searchQuery.toLowerCase())
+//         );
+//     }, [friends, searchQuery]);
 //
 //     const handleFriendClick = (friend) => {
 //         setSelectedFriend(friend);
@@ -45,12 +49,12 @@
 //     const handleFriendAdded = (newFriend) => {
 //         setFriends([...friends, newFriend]);
 //         setIsModalOpen(false);
-//         setIsFriendAdded(true);
 //     };
 //
 //     return (
-//         <div className="flex">
-//             <div className="w-1/5 bg-[#E76F51] p-4 h-screen">
+//         <div className="flex flex-col lg:flex-row">
+//             {/* Left panel */}
+//             <div className="lg:w-1/5 w-full bg-[#E76F51] p-4 lg:h-screen">
 //                 <h2 className="text-white text-lg mb-4">Your Friends:</h2>
 //                 <input
 //                     type="text"
@@ -59,18 +63,24 @@
 //                     value={searchQuery}
 //                     onChange={(e) => setSearchQuery(e.target.value)}
 //                 />
-//                 <ul>
-//                     {filteredFriends.map((friend) => (
-//                         <li
-//                             key={friend._id}
-//                             className="bg-[#E9C46A] text-white mb-2 p-2 rounded flex justify-between items-center cursor-pointer"
-//                             onClick={() => handleFriendClick(friend)}
-//                         >
-//                             <span className="text-black">{friend.name}</span>
-//                             <button className="bg-gray-800 text-white p-1 rounded">📋</button>
-//                         </li>
-//                     ))}
-//                 </ul>
+//                 {loading ? (
+//                     <div className="flex justify-center items-center">
+//                         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#E76F51] border-t-transparent"></div>
+//                     </div>
+//                 ) : (
+//                     <ul>
+//                         {filteredFriends.map((friend) => (
+//                             <li
+//                                 key={friend._id}
+//                                 className="bg-[#E9C46A] text-white mb-2 p-2 rounded flex justify-between items-center cursor-pointer"
+//                                 onClick={() => handleFriendClick(friend)}
+//                             >
+//                                 <span className="text-black">{friend.name}</span>
+//                                 <button className="bg-gray-800 text-white p-1 rounded">📋</button>
+//                             </li>
+//                         ))}
+//                     </ul>
+//                 )}
 //                 <button
 //                     className="text-white mt-4 block mx-auto"
 //                     onClick={handleAddFriendClick}
@@ -79,20 +89,15 @@
 //                 </button>
 //             </div>
 //
-//             <div className="w-full bg-teal-500 h-screen">
-//                 {isFriendAdded ? (
-//                     <div className="flex justify-center items-center h-full">
-//                         <h1 className="text-white text-3xl">Перезавантажте сторінку</h1>
-//                     </div>
-//                 ) : (
-//                     <div></div>
-//                 )}
+//             {/* Right panel */}
+//             <div className="lg:w-full w-full bg-teal-500 h-screen">
+//
 //             </div>
 //
-//
+//             {/* Деталі друга */}
 //             {selectedFriend && (
 //                 <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-//                     <div className="bg-[#F4A261] p-4 rounded-lg shadow-lg relative w-1/3">
+//                     <div className="bg-[#F4A261] p-4 rounded-lg shadow-lg relative w-11/12 lg:w-1/3">
 //                         <button
 //                             className="absolute top-2 right-2 text-black p-1 rounded"
 //                             onClick={handleCloseModal}
@@ -109,15 +114,9 @@
 //                 </div>
 //             )}
 //
-//
+//             {/* Модальне вікно для додавання друга */}
 //             {isModalOpen && (
 //                 <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-//                     <button
-//                         className="absolute top-2 right-2 text-black p-1 rounded"
-//                         onClick={() => setIsModalOpen(false)}
-//                     >
-//                         ✖
-//                     </button>
 //                     <AddFriend
 //                         token={token}
 //                         onFriendAdded={handleFriendAdded}
@@ -131,6 +130,7 @@
 //
 // export default FriendsList;
 
+
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import AddFriend from './AddFriend';
@@ -140,6 +140,7 @@ const FriendsList = ({ token }) => {
     const [selectedFriend, setSelectedFriend] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isFriendAdded, setIsFriendAdded] = useState(false); // Додаємо стан для повідомлення
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -182,6 +183,7 @@ const FriendsList = ({ token }) => {
     const handleFriendAdded = (newFriend) => {
         setFriends([...friends, newFriend]);
         setIsModalOpen(false);
+        setIsFriendAdded(true); // Відображаємо повідомлення після додавання друга
     };
 
     return (
@@ -223,8 +225,12 @@ const FriendsList = ({ token }) => {
             </div>
 
             {/* Right panel */}
-            <div className="lg:w-full w-full bg-teal-500 h-screen">
-
+            <div className="lg:w-full w-full bg-teal-500 h-screen flex justify-center items-center">
+                {isFriendAdded ? (
+                    <div className="text-white text-3xl">Перезавантажте сторінку</div>
+                ) : (
+                    <div className="text-white text-2xl">Список друзів порожній або немає оновлень.</div>
+                )}
             </div>
 
             {/* Деталі друга */}
