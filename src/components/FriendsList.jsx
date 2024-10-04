@@ -222,7 +222,10 @@ const FriendsList = ({ token }) => {
                 </button>
             </div>
 
+            {/* Right panel */}
+            <div className="lg:w-full w-full bg-teal-500 h-screen">
 
+            </div>
 
             {/* Деталі друга */}
             {selectedFriend && (
