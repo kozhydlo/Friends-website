@@ -24,6 +24,10 @@ This is a frontend application for managing friends' contacts. Users can add, vi
 
 The design for this application can be found on Figma: [View Design on Figma](https://www.figma.com/design/sLCtXKTOX8pflWCbavxUcV/friends-%2F-contact-website?node-id=1-13&t=xsXMCJ7riqsfMx09-1)
 
+## Backend Repository
+
+The backend for this application can be found at: [Friends Management App - Backend](https://github.com/kozhydlomark/friends-website-backend.git)
+
 
 ## Author
 
