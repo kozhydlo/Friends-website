@@ -39,10 +39,12 @@ const AuthPage = ({ onLoginSuccess, onSignupSuccess }) => {
                 withCredentials: true,
             });
 
-            // Перевіряємо статус відповіді, перш ніж викликати onSignupSuccess
-            if (res.status === 201 || res.data.token) {
-                onSignupSuccess(res.data.token);
+            // Перевіряємо статуси 200 і 204
+            if (res.status === 200 && res.data.token) {
+                onSignupSuccess(res.data.token);  // Успішна реєстрація з токеном
                 setSuccessMessage('Registration successful!');
+            } else if (res.status === 204) {
+                setSuccessMessage('Registration successful! Please login.');
             } else {
                 setSignupError('Registration failed. Try again.');
             }
