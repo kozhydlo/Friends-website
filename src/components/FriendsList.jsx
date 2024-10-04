@@ -136,3 +136,4 @@ const FriendsList = ({ token }) => {
 };
 
 export default FriendsList;
+
