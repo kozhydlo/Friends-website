@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Julius Sans One', 'Arial', 'sans-serif';
+}
+
+input:focus {
+    outline: none; /* Прибирає стандартний бордер */
+    box-shadow: none; /* Забирає можливу тінь */
+    border: none; /* Якщо є border, його теж прибирає */
+}
