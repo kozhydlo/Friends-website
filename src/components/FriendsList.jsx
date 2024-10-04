@@ -36,17 +36,17 @@ const FriendsList = ({ token }) => {
     };
 
     const handleAddFriendClick = () => {
-        setIsModalOpen(true); // Відкриваємо модальне вікно
+        setIsModalOpen(true);
     };
 
     const handleFriendAdded = (newFriend) => {
         setFriends([...friends, newFriend]);
-        setIsModalOpen(false); // Закриваємо модальне вікно після додавання
+        // setIsModalOpen(false); // Закриваємо модальне вікно після додавання
     };
 
     return (
         <div className="flex">
-            {/* Бокова панель з переліком друзів */}
+
             <div className="w-1/5 bg-[#E76F51] p-4 h-screen">
                 <h2 className="text-white text-lg mb-4">Your Friends:</h2>
                 <input
