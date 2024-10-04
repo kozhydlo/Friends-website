@@ -211,7 +211,7 @@ const FriendsList = ({ token }) => {
                                 onClick={() => handleFriendClick(friend)}
                             >
                                 <span className="text-black">{friend.name}</span>
-                                <button className="text-white p-1 rounded">📋</button>
+                                {/*<button className="text-white p-1 rounded">📋</button>*/}
                             </li>
                         ))}
 
