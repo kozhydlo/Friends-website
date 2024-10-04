@@ -21,7 +21,7 @@ This is a frontend application for managing friends' contacts. Users can add, vi
 
 ## Author
 
-- **Name**: [Kozhydlo MArk]
+- **Name**: [Kozhydlo Mark]
 - **Email**: [kozhydloma@gmail.com]
 
 ## Features
