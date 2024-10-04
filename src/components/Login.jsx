@@ -30,19 +30,28 @@ const AuthPage = ({ onLoginSuccess, onSignupSuccess }) => {
         e.preventDefault();
         setSignupError('');
         setSuccessMessage('');
+
         try {
             const res = await axios.post('https://friends-website-backend.onrender.com/auth/register', {
                 email: signupEmail,
                 password: signupPassword,
             }, {
-                withCredentials: true
+                withCredentials: true,
             });
-            onSignupSuccess(res.data.token);
-            setSuccessMessage('Registration successful!');
+
+            // Перевіряємо статус відповіді, перш ніж викликати onSignupSuccess
+            if (res.status === 201 || res.data.token) {
+                onSignupSuccess(res.data.token);
+                setSuccessMessage('Registration successful!');
+            } else {
+                setSignupError('Registration failed. Try again.');
+            }
         } catch (err) {
+            console.error(err);
             setSignupError('Registration failed. Try again.');
         }
     };
+
 
     return (
         <div className="flex flex-col justify-center items-center min-h-screen bg-[#2A9D8F] p-4">
