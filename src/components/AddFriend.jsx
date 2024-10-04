@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const AddFriend = ({ token, onFriendAdded, onClose  }) => {
+const AddFriend = ({ token, onFriendAdded, onClose }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [birthday, setBirthday] = useState('');
     const [address, setAddress] = useState('');
     const [card, setCard] = useState('');
-
-
 
     const handleAddFriend = async (e) => {
         e.preventDefault();
@@ -27,9 +25,10 @@ const AddFriend = ({ token, onFriendAdded, onClose  }) => {
                 },
             });
             onFriendAdded(res.data);
-            onClose()
+            onClose();
         } catch (err) {
             console.error('Error adding friend:', err);
+            alert('Не вдалося додати друга. Спробуйте ще раз.');
         }
     };
 
@@ -47,38 +46,40 @@ const AddFriend = ({ token, onFriendAdded, onClose  }) => {
                     <label className="block mb-1 text-black">Name:</label>
                     <input
                         type="text"
-                        className="p-2 w-full text-black rounded bg-[#E9C46A] focus:outline-none focus:border-none focus:ring-0"
+                        className="p-2 w-full text-black rounded bg-[#E9C46A] focus:outline-none"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Enter your friend's name"
+                        required
                     />
-
                 </div>
                 <div className="mb-4">
                     <label className="block mb-1 text-black">Address:</label>
                     <input
                         type="text"
-                        className="p-2 w-full text-black rounded bg-[#E9C46A] focus:outline-none focus:border-none focus:ring-0"
+                        className="p-2 w-full text-black rounded bg-[#E9C46A] focus:outline-none"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         placeholder="Enter address"
+                        required
                     />
                 </div>
                 <div className="mb-4">
                     <label className="block mb-1 text-black">Phone:</label>
                     <input
-                        type="number"
-                        className="p-2 w-full text-black rounded bg-[#E9C46A] focus:outline-none focus:border-none focus:ring-0"
+                        type="tel"
+                        className="p-2 w-full text-black rounded bg-[#E9C46A] focus:outline-none"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="Enter phone number"
+                        required
                     />
                 </div>
                 <div className="mb-4">
                     <label className="block mb-1 text-black">Birthday:</label>
                     <input
                         type="date"
-                        className="p-2 w-full text-black rounded bg-[#E9C46A] focus:outline-none focus:border-none focus:ring-0"
+                        className="p-2 w-full text-black rounded bg-[#E9C46A] focus:outline-none"
                         value={birthday}
                         onChange={(e) => setBirthday(e.target.value)}
                     />
@@ -87,24 +88,25 @@ const AddFriend = ({ token, onFriendAdded, onClose  }) => {
                     <label className="block mb-1 text-black">Email:</label>
                     <input
                         type="email"
-                        className="p-2 w-full text-black rounded bg-[#E9C46A] focus:outline-none focus:border-none focus:ring-0"
+                        className="p-2 w-full text-black rounded bg-[#E9C46A] focus:outline-none"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter email address"
+                        required
                     />
                 </div>
                 <div className="mb-4">
                     <label className="block mb-1 text-black">Card:</label>
                     <input
-                        type="number"
-                        className="p-2 w-full text-black rounded bg-[#E9C46A] focus:outline-none focus:border-none focus:ring-0"
+                        type="text"
+                        className="p-2 w-full text-black rounded bg-[#E9C46A] focus:outline-none"
                         value={card}
                         onChange={(e) => setCard(e.target.value)}
                         placeholder="Enter card number"
+                        required
                     />
                 </div>
-                <button className="bg-[#264653] hover:bg-blue-700 text-white py-2 px-4 rounded w-full mt-4"
-                        type="submit">
+                <button className="bg-[#264653] hover:bg-blue-700 text-white py-2 px-4 rounded w-full mt-4" type="submit">
                     Add Friend
                 </button>
             </form>
