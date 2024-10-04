@@ -211,9 +211,10 @@ const FriendsList = ({ token }) => {
                                 onClick={() => handleFriendClick(friend)}
                             >
                                 <span className="text-black">{friend.name}</span>
-                                <button className="bg-gray-800 text-white p-1 rounded">📋</button>
+                                <button className="text-white p-1 rounded">📋</button>
                             </li>
                         ))}
+
                     </ul>
                 )}
                 <button
@@ -229,7 +230,7 @@ const FriendsList = ({ token }) => {
                 {isFriendAdded ? (
                     <div className="text-white text-3xl">Перезавантажте сторінку</div>
                 ) : (
-                    <div className="text-white text-2xl">Список друзів порожній або немає оновлень.</div>
+                    <div className="text-white text-2xl">Оновлень немає </div>
                 )}
             </div>
 
